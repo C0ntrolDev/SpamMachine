@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Controls;
 
 namespace SpamBotRemaster.ViewModels.Base
 {
@@ -21,9 +22,13 @@ namespace SpamBotRemaster.ViewModels.Base
                 return false;
             }
 
+            
+
             field = value;
             OnPropertyChanged(propertyName);
             return true;
+
+             
         }
     }
 }

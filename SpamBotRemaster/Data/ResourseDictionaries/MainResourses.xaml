@@ -1,7 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:elements="clr-namespace:SpamBotRemaster.Infrastructure.CustomElements"
-                    xmlns:viewModels="clr-namespace:SpamBotRemaster.ViewModels">
+                    xmlns:viewModels="clr-namespace:SpamBotRemaster.ViewModels"
+                    xmlns:converters="clr-namespace:SpamBotRemaster.Infrastructure.Converters"
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                    xmlns:fa5="http://schemas.fontawesome.com/icons/">
 
 
     <Color x:Key="TextBoxBgDarkColor" A="255" R="4" G="4" B="5"  />
@@ -16,12 +19,13 @@
     <Color x:Key="StopButtonLightColor" A="255" R="180" G="0" B="0" />
     <Color x:Key="StopButtonVeryLightColor" A="255" R="230" G="0" B="0" />
 
+    <Color x:Key="GreyColor" A="255" R="112" G="112" B="112" />
+
 
     <Style TargetType="elements:TextBoxWithPlaceholder" x:Key="StandartTextBoxStyle">
 
         <Setter Property="Width" Value="300"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="PlaceholderColor" Value="#FF707070"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Top"/>
         <Setter Property="FontSize" Value="17"/>
@@ -30,12 +34,19 @@
         <Setter Property="TextColor" Value="White"/>
         <Setter Property="Margin" Value="0 4 0 4"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="ToolTipService.InitialShowDelay" Value="1500"/>
+        <Setter Property="ToolTipService.InitialShowDelay" Value="1000"/>
         <Setter Property="ToolTipService.ShowDuration" Value="1500"/>
         <Setter Property="CaretBrush" Value="White"/>
+
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{StaticResource TextBoxBgDarkColor}"/>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="PlaceholderColor">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource GreyColor}"/>
             </Setter.Value>
         </Setter>
 
@@ -134,8 +145,35 @@
         </Style.Triggers>
     </Style>
 
+    <Style TargetType="FrameworkElement" x:Key="AnimatedElementStyle">
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <ScaleTransform ScaleX="1" ScaleY="1"/>
+            </Setter.Value>
+        </Setter>
 
-    <Style TargetType="Button" x:Key="StartButtonStyle">
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard Timeline.DesiredFrameRate="165">
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.05" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.05" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard Timeline.DesiredFrameRate="165">
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="Button" x:Key="StartButtonStyle" BasedOn="{StaticResource AnimatedElementStyle}">
 
         <Setter Property="Height" Value="50"/>
         <Setter Property="Width" Value="130"/>
@@ -144,12 +182,6 @@
         <Setter Property="FontFamily" Value="Calibri"/>
         <Setter Property="FontSize" Value="17"/>
         <Setter Property="Foreground" Value="White"/>
-
-        <Setter Property="RenderTransform">
-            <Setter.Value>
-                <ScaleTransform ScaleX="1" ScaleY="1"/>
-            </Setter.Value>
-        </Setter>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -165,8 +197,6 @@
             <EventTrigger RoutedEvent="MouseEnter">
                 <BeginStoryboard>
                     <Storyboard Timeline.DesiredFrameRate="165">
-                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.05" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
-                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.05" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
                         <ColorAnimation Storyboard.TargetProperty="Background.Color"  Duration="0:0:0.1"  To="{StaticResource StartButtonLightColor}"/>
                     </Storyboard>
                 </BeginStoryboard>
@@ -175,8 +205,6 @@
             <EventTrigger RoutedEvent="MouseLeave">
                 <BeginStoryboard>
                     <Storyboard Timeline.DesiredFrameRate="165">
-                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
-                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
                         <ColorAnimation Storyboard.TargetProperty="Background.Color"  Duration="0:0:0.1" To="{StaticResource StartButtonColor}"/>
                     </Storyboard>
                 </BeginStoryboard>
@@ -236,7 +264,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="SettingsMenu" TargetType="Grid">
+    <Style TargetType="Grid" x:Key="SettingsMenu" >
         <Setter Property="Width" Value="200"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Background">
@@ -252,7 +280,7 @@
         </Setter>
 
         <Style.Triggers>
-            <DataTrigger Binding="{Binding (viewModels:AplicationVM.IsSettingsMenuOpen)}" Value="True">
+            <DataTrigger Binding="{Binding IsSettingsMenuOpen}" Value="True">
                 <DataTrigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
@@ -271,5 +299,30 @@
         </Style.Triggers>
     </Style>
 
+    <Style TargetType="fa5:SvgAwesome" x:Key="SvgAwesomeStyle">
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource GreyColor}"/>
+            </Setter.Value>
+        </Setter>
 
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard Timeline.DesiredFrameRate="165">
+                        <ColorAnimation Storyboard.TargetProperty="Foreground.Color"  Duration="0:0:0.1"  To="White"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard Timeline.DesiredFrameRate="165">
+                        <ColorAnimation Storyboard.TargetProperty="Foreground.Color"  Duration="0:0:0.1" To="{StaticResource GreyColor}"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+
+    </Style>
 </ResourceDictionary>

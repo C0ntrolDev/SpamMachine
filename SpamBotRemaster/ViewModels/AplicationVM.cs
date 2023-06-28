@@ -55,6 +55,32 @@ namespace SpamBotRemaster.ViewModels
             }
         }
 
+
+        private LambdaCommand openSettingsMenuCommand;
+        public LambdaCommand OpenSettingsMenuCommand
+        {
+            get
+            {
+                if (openSettingsMenuCommand == null)
+                {
+                    openSettingsMenuCommand = new LambdaCommand(obj => IsSettingsMenuOpen = true);
+                }
+                return openSettingsMenuCommand;
+            }
+        }
+
+        private LambdaCommand closeSettingsMenuCommand;
+        public LambdaCommand CloseSettingsMenuCommand
+        {
+            get
+            {
+                if (closeSettingsMenuCommand == null)
+                {
+                    closeSettingsMenuCommand = new LambdaCommand(obj => IsSettingsMenuOpen = false);
+                }
+                return closeSettingsMenuCommand;
+            }
+        }
         #endregion
 
 
@@ -68,7 +94,7 @@ namespace SpamBotRemaster.ViewModels
             set => Set(ref countOfSentMessages, value);
         }
 
-        private bool isSettingsMenuOpen;
+        private bool isSettingsMenuOpen = true;
         public bool IsSettingsMenuOpen
         {
             get => isSettingsMenuOpen;
