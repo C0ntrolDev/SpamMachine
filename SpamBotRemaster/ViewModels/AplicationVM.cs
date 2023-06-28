@@ -94,7 +94,7 @@ namespace SpamBotRemaster.ViewModels
             set => Set(ref countOfSentMessages, value);
         }
 
-        private bool isSettingsMenuOpen = true;
+        private bool isSettingsMenuOpen;
         public bool IsSettingsMenuOpen
         {
             get => isSettingsMenuOpen;
