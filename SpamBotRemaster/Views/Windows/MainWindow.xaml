@@ -14,7 +14,8 @@
         Title="SpamBotRemake" 
         Icon="/Data/Images/icon.png"
         ResizeMode="NoResize"
-        Height="550" Width="500">
+        Height="550" Width="500"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <Window.DataContext>
         <vm:AplicationVM/>
@@ -23,6 +24,7 @@
     <Window.Resources>
         <converters:ToIntConverter x:Key="Intconverter"/>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <converters:LanguageToStringConverter x:Key="LanguageToStringConverter"/>
     </Window.Resources>
 
 
@@ -51,30 +53,30 @@
             <Grid Grid.Row="0" Grid.Column="0">
 
                 <Grid.Background>
-                    <SolidColorBrush Color="{StaticResource TextBoxBgDarkColor}"/>
+                    <SolidColorBrush Color="{StaticResource VeryDarkGreyColor}"/>
                 </Grid.Background>
 
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="27" Width="27">
                     <Grid.Background>
-                        <SolidColorBrush Color="{StaticResource TextBoxBgDarkColor}"/>
+                        <SolidColorBrush Color="{StaticResource VeryDarkGreyColor}"/>
                     </Grid.Background>
 
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">
                             <i:InvokeCommandAction Command="{Binding OpenSettingsMenuCommand}" />
-                        </i:EventTrigger> 
+                        </i:EventTrigger>
                     </i:Interaction.Triggers>
 
                     <fa5:SvgAwesome  Icon="Solid_Cog" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource SvgAwesomeStyle}"/>
                 </Grid>
-                
-                
+
+
             </Grid>
 
             <Grid Grid.Row="0" Grid.Column="2">
 
                 <Grid.Background>
-                    <SolidColorBrush Color="{StaticResource TextBoxBgDarkColor}"/>
+                    <SolidColorBrush Color="{StaticResource VeryDarkGreyColor}"/>
                 </Grid.Background>
 
                 <TextBlock
@@ -155,7 +157,7 @@
                     </Button.Background>
                 </Button>
 
-                
+
                 <Button Grid.Column="1" Style="{StaticResource StopButtonStyle}" Content="{Binding EndSpamButtonText}" HorizontalAlignment="Left" Command="{Binding EndSpamCommand}">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource StopButtonColor}"/>
@@ -165,7 +167,7 @@
             </Grid>
         </Grid>
 
-        
+
         <Grid>
             <StackPanel Background="Black" Opacity="0.55" Visibility="{Binding IsSettingsMenuOpen, Converter={StaticResource BoolToVisibilityConverter}}">
                 <i:Interaction.Triggers>
@@ -175,10 +177,61 @@
                 </i:Interaction.Triggers>
             </StackPanel>
 
-            <Grid Style="{StaticResource SettingsMenu}"/>
+            <Grid Style="{StaticResource SettingsMenuStyle}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="49*"/>
+                </Grid.RowDefinitions>
+
+
+                <Grid Grid.Row="0">
+
+                    <Grid.Background>
+                        <SolidColorBrush Color="{StaticResource VeryDarkGreyColor}"/>
+                    </Grid.Background>
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding CloseSettingsMenuCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <fa5:SvgAwesome  Icon="Solid_Cog"  HorizontalAlignment="Left" VerticalAlignment="Center"
+                                     Margin="5 0 0 0" Height="27" Width="27" Foreground="White"/>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
+                               Text="{Binding SettingsTextBoxText}" Foreground="White" FontSize="20" FontFamily="Franklin Gothic Demi Cond"/>
+
+                </Grid>
+
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="1">
+                        <StackPanel Margin="0 10 0 0">
+                            <TextBlock Text="{Binding AppLanguageTextBoxText}" Foreground="White" FontFamily="Franklin Gothic Demi Cond" FontSize="18"/>
+                        </StackPanel>
+
+                        <ComboBox ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" Style="{StaticResource ComboBoxStyle1}" Foreground="White" FontSize="14" HorizontalAlignment="Stretch" Margin="0 5 10 0" ItemsSource="{Binding Languagies }" SelectedItem="{Binding SelectedLanguage}" FontFamily="Franklin Gothic Book">
+
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock Text="{Binding Converter={StaticResource LanguageToStringConverter}}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                    </StackPanel>
+                </Grid>
+            </Grid>
         </Grid>
 
-        
+
 
     </Grid>
 

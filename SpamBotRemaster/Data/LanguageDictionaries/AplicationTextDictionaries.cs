@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using SpamBotRemaster.Models;
 using SpamBotRemaster.Data.Enums;
+using System.Linq;
 
 namespace SpamBotRemaster.Data.LanguageDictionaries
 {
@@ -32,6 +33,9 @@ namespace SpamBotRemaster.Data.LanguageDictionaries
                 {"countOfMessagesToolTip","Введите сколько раз будет отправлено сообщение"},
                 {"delayBeforeSendToolTip","Введите задержку между отправлением сообщений в милисекундах (рекомендуется начать с 200мс)"},
                 {"delayBetweenPasteAndSendToolTip","Нужно ввести, если в программе возможность для отправления появляется не сразу после вставки текста"},
+                
+                {"settings","Настройки"},
+                {"appLanguage","Язык приложения :"},
 
                 {"startSpam","Начать спам"},
                 {"endSpam","Закончить спам"}
@@ -54,6 +58,8 @@ namespace SpamBotRemaster.Data.LanguageDictionaries
                 {"delayBeforeSendToolTip","Enter the delay between sending messages in milliseconds (it is recommended to start with 200ms)"},
                 {"delayBetweenPasteAndSendToolTip","You need to enter if the opportunity for sending does not appear in the program immediately after inserting the text"},
 
+                {"settings","Settings"},
+                {"appLanguage","App language :"},
 
                 {"startSpam","Start spam"},
                 {"endSpam","End spam"}
@@ -67,6 +73,6 @@ namespace SpamBotRemaster.Data.LanguageDictionaries
         }
 
         public static string GetTextByDictionaryKey(string key, Language language) => AllTextDictionaries.GetValueOrDefault(language)?.GetValueOrDefault(key) ?? "";
-        
+
     }
 }

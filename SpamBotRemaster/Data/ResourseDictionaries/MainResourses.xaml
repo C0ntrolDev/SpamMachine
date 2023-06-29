@@ -7,9 +7,12 @@
                     xmlns:fa5="http://schemas.fontawesome.com/icons/">
 
 
-    <Color x:Key="TextBoxBgDarkColor" A="255" R="4" G="4" B="5"  />
-    <Color x:Key="TextBoxBgLightColor" A="255" R="12" G="12" B="13" />
-    <Color x:Key="TextBoxBgVeryLightColor" A="255" R="32" G="32" B="33" />
+    <Color x:Key="VeryDarkGreyColor" A="255" R="4" G="4" B="5"  />
+    <Color x:Key="DarkGreyColor" A="255" R="12" G="12" B="13" />
+    <Color x:Key="GreyColor" A="255" R="17" G="17" B="18" />
+    <Color x:Key="LightGreyColor" A="255" R="23" G="23" B="23" />
+    <Color x:Key="VeryLightGreyColor" A="255" R="27" G="27" B="27" />
+    <Color x:Key="VeryVeryLightGreyColor" A="255" R="32" G="32" B="33" />
 
     <Color x:Key="StartButtonColor" A="255" R="2" G="130" B="0" />
     <Color x:Key="StartButtonLightColor" A="255" R="3" G="180" B="0" />
@@ -19,7 +22,7 @@
     <Color x:Key="StopButtonLightColor" A="255" R="180" G="0" B="0" />
     <Color x:Key="StopButtonVeryLightColor" A="255" R="230" G="0" B="0" />
 
-    <Color x:Key="GreyColor" A="255" R="112" G="112" B="112" />
+    <Color x:Key="SimpleGreyColor" A="255" R="112" G="112" B="112" />
 
 
     <Style TargetType="elements:TextBoxWithPlaceholder" x:Key="StandartTextBoxStyle">
@@ -40,13 +43,13 @@
 
         <Setter Property="Background">
             <Setter.Value>
-                <SolidColorBrush Color="{StaticResource TextBoxBgDarkColor}"/>
+                <SolidColorBrush Color="{StaticResource VeryDarkGreyColor}"/>
             </Setter.Value>
         </Setter>
 
         <Setter Property="PlaceholderColor">
             <Setter.Value>
-                <SolidColorBrush Color="{StaticResource GreyColor}"/>
+                <SolidColorBrush Color="{StaticResource SimpleGreyColor}"/>
             </Setter.Value>
         </Setter>
 
@@ -101,7 +104,7 @@
                         <Storyboard Timeline.DesiredFrameRate="165">
                             <DoubleAnimation Storyboard.TargetProperty="Height" To="33" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
                             <DoubleAnimation Storyboard.TargetProperty="Width" To="330" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
-                            <ColorAnimation Storyboard.TargetProperty="Background.Color" To="{StaticResource TextBoxBgLightColor}" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
+                            <ColorAnimation Storyboard.TargetProperty="Background.Color" To="{StaticResource DarkGreyColor}" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>
@@ -113,7 +116,7 @@
                         <Storyboard Timeline.DesiredFrameRate="165">
                             <DoubleAnimation Storyboard.TargetProperty="Height" To="30" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
                             <DoubleAnimation Storyboard.TargetProperty="Width" To="300" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
-                            <ColorAnimation Storyboard.TargetProperty="Background.Color" To="{StaticResource TextBoxBgDarkColor}" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
+                            <ColorAnimation Storyboard.TargetProperty="Background.Color" To="{StaticResource VeryDarkGreyColor}" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>
@@ -264,12 +267,12 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="Grid" x:Key="SettingsMenu" >
+    <Style TargetType="Grid" x:Key="SettingsMenuStyle" >
         <Setter Property="Width" Value="200"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Background">
             <Setter.Value>
-                <SolidColorBrush Color="{StaticResource TextBoxBgVeryLightColor}"></SolidColorBrush>
+                <SolidColorBrush Color="{StaticResource VeryVeryLightGreyColor}"></SolidColorBrush>
             </Setter.Value>
         </Setter>
 
@@ -302,7 +305,7 @@
     <Style TargetType="fa5:SvgAwesome" x:Key="SvgAwesomeStyle">
         <Setter Property="Foreground">
             <Setter.Value>
-                <SolidColorBrush Color="{StaticResource GreyColor}"/>
+                <SolidColorBrush Color="{StaticResource SimpleGreyColor}"/>
             </Setter.Value>
         </Setter>
 
@@ -318,11 +321,183 @@
             <EventTrigger RoutedEvent="MouseLeave">
                 <BeginStoryboard>
                     <Storyboard Timeline.DesiredFrameRate="165">
-                        <ColorAnimation Storyboard.TargetProperty="Foreground.Color"  Duration="0:0:0.1" To="{StaticResource GreyColor}"/>
+                        <ColorAnimation Storyboard.TargetProperty="Foreground.Color"  Duration="0:0:0.1" To="{StaticResource SimpleGreyColor}"/>
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
         </Style.Triggers>
 
     </Style>
+
+
+
+
+    <Style x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="IsTabStop" Value="false"/>
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="ClickMode" Value="Press"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border x:Name="templateRoot" BorderThickness="0" SnapsToDevicePixels="true">
+                        <Border.Background>
+                            <SolidColorBrush Color="{StaticResource VeryDarkGreyColor}"></SolidColorBrush>
+                        </Border.Background>
+
+                        <Border x:Name="splitBorder" BorderBrush="Transparent" BorderThickness="0" HorizontalAlignment="Right" Margin="0" SnapsToDevicePixels="true" Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}">
+                            <Path x:Name="arrow" Data="F1 M 0,0 L 2.667,2.66665 L 5.3334,0 L 5.3334,-1.78168 L 2.6667,0.88501 L0,-1.78168 L0,0 Z" Fill="White" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="templateRoot">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{StaticResource GreyColor }"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <ControlTemplate x:Key="ComboBoxTemplate" TargetType="{x:Type ComboBox}">
+        <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0"/>
+            </Grid.ColumnDefinitions>
+            <Popup x:Name="PART_Popup" AllowsTransparency="true" Grid.ColumnSpan="2" IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" Margin="1" Placement="Bottom" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+                <Border x:Name="dropDownBorder" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" BorderThickness="0"
+                            MinWidth="{Binding ActualWidth, ElementName=templateRoot}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                    <ScrollViewer x:Name="DropDownScrollViewer">
+                        <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
+                            <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
+                                <Rectangle x:Name="opaqueRect" Height="{Binding ActualHeight, ElementName=dropDownBorder}" Width="{Binding ActualWidth, ElementName=dropDownBorder}">
+                                    <Rectangle.Fill>
+                                        <SolidColorBrush Color="{StaticResource DarkGreyColor}"></SolidColorBrush>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </Canvas>
+                            <ItemsPresenter Margin=" 0 2" x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </Grid>
+                    </ScrollViewer>
+                </Border>
+            </Popup>
+            <ToggleButton x:Name="toggleButton" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Grid.ColumnSpan="2" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" Style="{StaticResource ComboBoxToggleButton}"/>
+            <ContentPresenter x:Name="contentPresenter" ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" Content="{TemplateBinding SelectionBoxItem}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="false" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="HasItems" Value="false">
+                <Setter Property="Height" TargetName="dropDownBorder" Value="95"/>
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsGrouping" Value="true"/>
+                    <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+            </MultiTrigger>
+            <Trigger Property="ScrollViewer.CanContentScroll" SourceName="DropDownScrollViewer" Value="false">
+                <Setter Property="Canvas.Top" TargetName="opaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}"/>
+                <Setter Property="Canvas.Left" TargetName="opaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <Style x:Key="ComboBoxStyle1" TargetType="{x:Type ComboBox}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="Padding" Value="6,3,5,3"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="Template" Value="{StaticResource ComboBoxTemplate}"/>
+    </Style>
+    <Style x:Key="ComboBoxItemContainerStyle1" TargetType="{x:Type ComboBoxItem}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Padding" Value="4,1"/>
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                    <Border x:Name="Bd" Background="{TemplateBinding Background}"  BorderThickness="0" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="True"/>
+                                <Condition Property="IsMouseOver" Value="False"/>
+                                <Condition Property="IsKeyboardFocused" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="Bd">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{StaticResource LightGreyColor}"/>
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="False"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="Bd">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{StaticResource GreyColor}"/>
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="False"/>
+                                <Condition Property="IsKeyboardFocused" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="Bd">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{StaticResource GreyColor}"/>
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="True"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="Bd">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{StaticResource VeryLightGreyColor}"/>
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="True"/>
+                                <Condition Property="IsKeyboardFocused" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="Bd">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{StaticResource VeryLightGreyColor}"/>
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

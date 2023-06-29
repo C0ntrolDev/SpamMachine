@@ -1,11 +1,23 @@
 ﻿using SpamBotRemaster.Data.Enums;
+using System;
 
 namespace SpamBotRemaster.Models
 {
    
     public class AplicationSettings
     {
-        public Language AplicationLanguage{ get; set; }
+        public event Action LanguageChanged;
+
+        private Language language;
+        public Language Language
+        {
+            get => language;
+            set
+            {
+                language = value;
+                LanguageChanged?.Invoke();
+            }
+        }
 
         public static AplicationSettings DeffaultSettings { get; }
 
@@ -13,7 +25,7 @@ namespace SpamBotRemaster.Models
         {
             DeffaultSettings = new AplicationSettings()
             {
-                AplicationLanguage = Language.eng
+                Language = Language.eng
             };
         }
     }
