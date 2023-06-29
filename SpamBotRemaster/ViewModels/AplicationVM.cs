@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using GongSolutions.Wpf.DragDrop;
+using SpamBotRemaster.Data.Enums;
 using SpamBotRemaster.Data.LanguageDictionaries;
 using SpamBotRemaster.Infrastructure.Commands;
 using SpamBotRemaster.Models;
@@ -55,6 +58,32 @@ namespace SpamBotRemaster.ViewModels
             }
         }
 
+
+        private LambdaCommand openSettingsMenuCommand;
+        public LambdaCommand OpenSettingsMenuCommand
+        {
+            get
+            {
+                if (openSettingsMenuCommand == null)
+                {
+                    openSettingsMenuCommand = new LambdaCommand(obj => IsSettingsMenuOpen = true);
+                }
+                return openSettingsMenuCommand;
+            }
+        }
+
+        private LambdaCommand closeSettingsMenuCommand;
+        public LambdaCommand CloseSettingsMenuCommand
+        {
+            get
+            {
+                if (closeSettingsMenuCommand == null)
+                {
+                    closeSettingsMenuCommand = new LambdaCommand(obj => IsSettingsMenuOpen = false);
+                }
+                return closeSettingsMenuCommand;
+            }
+        }
         #endregion
 
 
@@ -68,6 +97,7 @@ namespace SpamBotRemaster.ViewModels
             set => Set(ref countOfSentMessages, value);
         }
 
+
         private bool isSettingsMenuOpen;
         public bool IsSettingsMenuOpen
         {
@@ -77,19 +107,48 @@ namespace SpamBotRemaster.ViewModels
         }
 
 
+        public ObservableCollection<Language> Languagies { get; set; }
+        public Language SelectedLanguage
+        {
+            get => aplicationSettings.Language;
+            set
+            {
+                aplicationSettings.Language = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        private string settingsTextBoxTextKey;
+        public string SettingsTextBoxText
+        {
+            get => AplicationTextDictionaries.GetTextByDictionaryKey(settingsTextBoxTextKey, aplicationSettings.Language);
+            set => Set(ref settingsTextBoxTextKey, value);
+        }
+
+        private string appLanguageTextBoxTextKey;
+        public string AppLanguageTextBoxText
+        {
+            get => AplicationTextDictionaries.GetTextByDictionaryKey(appLanguageTextBoxTextKey, aplicationSettings.Language);
+            set => Set(ref appLanguageTextBoxTextKey, value);
+        }
+
+        
         private string startSpamButtonTextKey;
         public string StartSpamButtonText
         {
-            get => AplicationTextDictionaries.GetTextByDictionaryKey(startSpamButtonTextKey, aplicationSettings.AplicationLanguage);
+            get => AplicationTextDictionaries.GetTextByDictionaryKey(startSpamButtonTextKey, aplicationSettings.Language);
             set => Set(ref startSpamButtonTextKey, value);
         }
 
         private string endSpamButtonTextKey;
         public string EndSpamButtonText
         {
-            get => AplicationTextDictionaries.GetTextByDictionaryKey(endSpamButtonTextKey, aplicationSettings.AplicationLanguage);
+            get => AplicationTextDictionaries.GetTextByDictionaryKey(endSpamButtonTextKey, aplicationSettings.Language);
             set => Set(ref endSpamButtonTextKey, value);
         }
+
+
 
         #region ModelProperties
 
@@ -199,10 +258,15 @@ namespace SpamBotRemaster.ViewModels
             DelayBeforeSendVM = new TextBoxWithPlaceholderVM("delayBeforeSend", "delayBeforeSendToolTip", aplicationSettings);
             DelayBetweenPasteAndSendVM = new TextBoxWithPlaceholderVM("delayBetweenPasteAndSend", "delayBetweenPasteAndSendToolTip", aplicationSettings);
 
+            settingsTextBoxTextKey = "settings";
+            appLanguageTextBoxTextKey = "appLanguage";
             startSpamButtonTextKey = "startSpam";
             endSpamButtonTextKey = "endSpam";
-        }
 
+            Languagies = new ObservableCollection<Language>(){Language.ru,Language.eng};
+
+            aplicationSettings.LanguageChanged += OnLanguageChanged;
+        }
 
         private void SetCountOfSentMessages(object parameter)
         {
@@ -211,6 +275,20 @@ namespace SpamBotRemaster.ViewModels
         private void ShowExceptionMessage(object parameter)
         {
             MessageBox.Show((string)parameter);
+        }
+
+        private void OnLanguageChanged()
+        {
+            OnPropertyChanged("StartSpamButtonText");
+            OnPropertyChanged("EndSpamButtonText");
+            OnPropertyChanged("AppLanguageTextBoxText");
+            OnPropertyChanged("SettingsTextBoxText");
+
+            Task.Run(() =>
+            {
+                saveSettingsService.SaveSettings(aplicationSettings, "settings.json");
+            });
+
         }
 
 

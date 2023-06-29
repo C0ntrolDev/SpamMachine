@@ -67,6 +67,8 @@ namespace SpamBotRemaster.Infrastructure.CustomElements
             {
                 PlaceholderVisibility = Visibility.Visible;
             }
+
+            
         }
 
 

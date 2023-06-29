@@ -9,289 +9,22 @@
         xmlns:dd="urn:gong-wpf-dragdrop"
         xmlns:converters="clr-namespace:SpamBotRemaster.Infrastructure.Converters"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:fa5="http://schemas.fontawesome.com/icons/"
         mc:Ignorable="d"
         Title="SpamBotRemake" 
         Icon="/Data/Images/icon.png"
         ResizeMode="NoResize"
-        Height="550" Width="500">
+        Height="550" Width="500"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <Window.DataContext>
         <vm:AplicationVM/>
     </Window.DataContext>
 
     <Window.Resources>
-
         <converters:ToIntConverter x:Key="Intconverter"/>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-
-        <Color x:Key="TextBoxBgDarkColor" A="255" R="4" G="4" B="5"  />
-        <Color x:Key="TextBoxBgLightColor" A="255" R="12" G="12" B="13" />
-        <Color x:Key="TextBoxBgVeryLightColor" A="255" R="32" G="32" B="33" />
-
-        <Color x:Key="StartButtonColor" A="255" R="2" G="130" B="0" />
-        <Color x:Key="StartButtonLightColor" A="255" R="3" G="180" B="0" />
-        <Color x:Key="StartButtonVeryLightColor" A="255" R="4" G="230" B="0" />
-
-        <Color x:Key="StopButtonColor" A="255" R="130" G="0" B="0" />
-        <Color x:Key="StopButtonLightColor" A="255" R="180" G="0" B="0" />
-        <Color x:Key="StopButtonVeryLightColor" A="255" R="230" G="0" B="0" />
-
-
-        <Style TargetType="elements:TextBoxWithPlaceholder" x:Key="StandartTextBoxStyle">
-
-            <Setter Property="Width" Value="300"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="PlaceholderColor" Value="#FF707070"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Top"/>
-            <Setter Property="FontSize" Value="17"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="FontFamily" Value="Calibri"/>
-            <Setter Property="TextColor" Value="White"/>
-            <Setter Property="Margin" Value="0 4 0 4"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="ToolTipService.InitialShowDelay" Value="1500"/>
-            <Setter Property="ToolTipService.ShowDuration" Value="1500"/>
-            <Setter Property="CaretBrush" Value="White"/>
-            <Setter Property="Background">
-                <Setter.Value>
-                    <SolidColorBrush Color="{StaticResource TextBoxBgDarkColor}"/>
-                </Setter.Value>
-            </Setter>
-
-            <Setter Property="RenderTransform">
-                <Setter.Value>
-                    <ScaleTransform ScaleX="1" ScaleY="1"/>
-                </Setter.Value>
-            </Setter>
-
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="elements:TextBoxWithPlaceholder">
-                        <Grid>
-                            <Border Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="3">
-
-                                <Grid>
-                                    <TextBlock Text="{TemplateBinding PlaceholderText}"
-                                               Visibility="{TemplateBinding PlaceholderVisibility}"
-                                               TextWrapping="{TemplateBinding TextWrapping}"
-                                               Foreground="{TemplateBinding PlaceholderColor}"
-                                               FontStyle="{TemplateBinding FontStyle}"
-                                               FontSize="{TemplateBinding FontSize}"
-                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                               Background="Transparent"
-                                               Padding="5"/>
-                                    <TextBox Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}"
-                                             CaretBrush="{TemplateBinding CaretBrush}"
-                                             TextWrapping="{TemplateBinding TextWrapping}"
-                                             Foreground="{TemplateBinding TextColor}"
-                                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                             FontStyle="{TemplateBinding FontStyle}"
-                                             FontSize="{TemplateBinding FontSize}"
-                                             Background="Transparent"
-                                             BorderThickness="0"
-                                             Padding="5"/>
-                                </Grid>
-
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-
-            <Style.Triggers>
-
-                <EventTrigger RoutedEvent="MouseEnter">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard Timeline.DesiredFrameRate="165">
-                                <DoubleAnimation Storyboard.TargetProperty="Height" To="33" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
-                                <DoubleAnimation Storyboard.TargetProperty="Width" To="330" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
-                                <ColorAnimation Storyboard.TargetProperty="Background.Color" To="{StaticResource TextBoxBgLightColor}" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-
-                <EventTrigger RoutedEvent="MouseLeave">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard Timeline.DesiredFrameRate="165">
-                                <DoubleAnimation Storyboard.TargetProperty="Height" To="30" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
-                                <DoubleAnimation Storyboard.TargetProperty="Width" To="300" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
-                                <ColorAnimation Storyboard.TargetProperty="Background.Color" To="{StaticResource TextBoxBgDarkColor}" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style TargetType="elements:TextBoxWithPlaceholder" BasedOn="{StaticResource StandartTextBoxStyle}" x:Key="BigTextBoxStyle">
-            <Style.Triggers>
-                <EventTrigger RoutedEvent="MouseEnter">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard Timeline.DesiredFrameRate="165">
-                                <DoubleAnimation Storyboard.TargetProperty="Height" To="183" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-
-                <EventTrigger RoutedEvent="MouseLeave">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard Timeline.DesiredFrameRate="165">
-                                <DoubleAnimation Storyboard.TargetProperty="Height" To="180" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-            </Style.Triggers>
-        </Style>
-
-
-        <Style TargetType="Button" x:Key="StartButtonStyle">
-
-            <Setter Property="Height" Value="50"/>
-            <Setter Property="Width" Value="130"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="FontFamily" Value="Calibri"/>
-            <Setter Property="FontSize" Value="17"/>
-            <Setter Property="Foreground" Value="White"/>
-
-            <Setter Property="RenderTransform">
-                <Setter.Value>
-                    <ScaleTransform ScaleX="1" ScaleY="1"/>
-                </Setter.Value>
-            </Setter>
-
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ButtonBase}">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-
-            <Style.Triggers>
-                <EventTrigger RoutedEvent="MouseEnter">
-                    <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="165">
-                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.05" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
-                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.05" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
-                            <ColorAnimation Storyboard.TargetProperty="Background.Color"  Duration="0:0:0.1"  To="{StaticResource StartButtonLightColor}"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-
-                <EventTrigger RoutedEvent="MouseLeave">
-                    <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="165">
-                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
-                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1" Duration="0:0:0.1" FillBehavior="HoldEnd"/>
-                            <ColorAnimation Storyboard.TargetProperty="Background.Color"  Duration="0:0:0.1" To="{StaticResource StartButtonColor}"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-
-                <EventTrigger RoutedEvent="PreviewMouseDown">
-                    <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="165">
-                            <ColorAnimation Storyboard.TargetProperty="Background.Color"  Duration="0:0:0.1" To="{StaticResource StartButtonVeryLightColor}"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-
-                <EventTrigger RoutedEvent="PreviewMouseUp">
-                    <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="165">
-                            <ColorAnimation Storyboard.TargetProperty="Background.Color"  Duration="0:0:0.1" To="{StaticResource StartButtonLightColor}"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style TargetType="Button" x:Key="StopButtonStyle" BasedOn="{StaticResource StartButtonStyle}">
-            <Style.Triggers>
-                <EventTrigger RoutedEvent="MouseEnter">
-                    <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="165">
-                            <ColorAnimation Storyboard.TargetProperty="Background.Color"  Duration="0:0:0.1"  To="{StaticResource StopButtonLightColor}"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-
-                <EventTrigger RoutedEvent="MouseLeave">
-                    <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="165">
-                            <ColorAnimation Storyboard.TargetProperty="Background.Color"  Duration="0:0:0.1" To="{StaticResource StopButtonColor}"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-
-                <EventTrigger RoutedEvent="PreviewMouseDown">
-                    <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="165">
-                            <ColorAnimation Storyboard.TargetProperty="Background.Color"  Duration="0:0:0.1" To="{StaticResource StopButtonVeryLightColor}"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-
-                <EventTrigger RoutedEvent="PreviewMouseUp">
-                    <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="165">
-                            <ColorAnimation Storyboard.TargetProperty="Background.Color"  Duration="0:0:0.1" To="{StaticResource StopButtonLightColor}"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="SettingsMenu" TargetType="Grid">
-            <Setter Property="Width" Value="200"/>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="Background">
-                <Setter.Value>
-                    <SolidColorBrush Color="{StaticResource TextBoxBgVeryLightColor}"></SolidColorBrush>
-                </Setter.Value>
-            </Setter>
-
-                <Setter Property="RenderTransform">
-                <Setter.Value>
-                    <TranslateTransform X="-200" x:Name="TranslateTransform"/>
-                </Setter.Value>
-            </Setter>
-
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding IsSettingsMenuOpen}" Value="True">
-                    <DataTrigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="0" Duration="0:0:0.3"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.EnterActions>
-                    <DataTrigger.ExitActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="-200" Duration="0:0:0.3"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.ExitActions>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
-        
+        <converters:LanguageToStringConverter x:Key="LanguageToStringConverter"/>
     </Window.Resources>
 
 
@@ -303,8 +36,8 @@
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="38*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="39*"/>
                 <RowDefinition Height="6*"/>
                 <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
@@ -315,23 +48,50 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Grid Column="2">
+
+
+            <Grid Grid.Row="0" Grid.Column="0">
 
                 <Grid.Background>
-                    <SolidColorBrush Color="{StaticResource TextBoxBgDarkColor}"/>
+                    <SolidColorBrush Color="{StaticResource VeryDarkGreyColor}"/>
+                </Grid.Background>
+
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="27" Width="27">
+                    <Grid.Background>
+                        <SolidColorBrush Color="{StaticResource VeryDarkGreyColor}"/>
+                    </Grid.Background>
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding OpenSettingsMenuCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <fa5:SvgAwesome  Icon="Solid_Cog" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource SvgAwesomeStyle}"/>
+                </Grid>
+
+
+            </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="2">
+
+                <Grid.Background>
+                    <SolidColorBrush Color="{StaticResource VeryDarkGreyColor}"/>
                 </Grid.Background>
 
                 <TextBlock
-                 Foreground="White"
-                 HorizontalAlignment="Center" 
-                 VerticalAlignment="Center"
-                 FontFamily="Calibri" 
-                 FontSize="20" 
-                 Text="{Binding CountOfSentMessages, Mode=OneWay, Converter={StaticResource Intconverter}}"/>
+                    Foreground="White"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"
+                    FontFamily="Calibri" 
+                    FontSize="20" 
+                    Text="{Binding CountOfSentMessages, Mode=OneWay, Converter={StaticResource Intconverter}}"/>
+
             </Grid>
 
 
-            <StackPanel Grid.ColumnSpan="3" Grid.Row="1" >
+
+            <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1" >
 
                 <elements:TextBoxWithPlaceholder Height="30" PlaceholderText="{Binding ProcessNameVM.PlaceholderText}" Style="{StaticResource StandartTextBoxStyle}" 
                                              Text="{Binding ProcessName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
@@ -397,7 +157,8 @@
                     </Button.Background>
                 </Button>
 
-                <Button Grid.Column="1" Style="{StaticResource StopButtonStyle}" Content="{Binding EndSpamButtonText}" HorizontalAlignment="Right" Command="{Binding EndSpamCommand}">
+
+                <Button Grid.Column="1" Style="{StaticResource StopButtonStyle}" Content="{Binding EndSpamButtonText}" HorizontalAlignment="Left" Command="{Binding EndSpamCommand}">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource StopButtonColor}"/>
                     </Button.Background>
@@ -406,22 +167,81 @@
             </Grid>
         </Grid>
 
-        
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="ControlDev" FontSize="12" FontFamily="Franklin Gothic Book">
+            <TextBlock.Foreground>
+                <SolidColorBrush Color="{StaticResource SimpleGreyColor}"/>
+            </TextBlock.Foreground>
+        </TextBlock>
+
         <Grid>
-            <StackPanel Background="Black" Opacity="0.55" Visibility="{Binding IsSettingsMenuOpen, Converter={StaticResource BoolToVisibilityConverter}, Mode=TwoWay}">
+            <StackPanel Background="Black" Opacity="0.55" Visibility="{Binding IsSettingsMenuOpen, Converter={StaticResource BoolToVisibilityConverter}}">
                 <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseLeftButtonDown">
-                        <i:ChangePropertyAction PropertyName="Visibility" Value="2"/>
+                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{Binding CloseSettingsMenuCommand}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </StackPanel>
 
-            <Grid Style="{StaticResource SettingsMenu}"/>
+            <Grid Style="{StaticResource SettingsMenuStyle}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="49*"/>
+                </Grid.RowDefinitions>
+
+
+                <Grid Grid.Row="0">
+
+                    <Grid.Background>
+                        <SolidColorBrush Color="{StaticResource VeryDarkGreyColor}"/>
+                    </Grid.Background>
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding CloseSettingsMenuCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <fa5:SvgAwesome  Icon="Solid_Cog"  HorizontalAlignment="Left" VerticalAlignment="Center"
+                                     Margin="5 0 0 0" Height="27" Width="27" Foreground="White"/>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
+                               Text="{Binding SettingsTextBoxText}" Foreground="White" FontSize="20" FontFamily="Franklin Gothic Demi Cond"/>
+
+                </Grid>
+
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="1">
+                        <StackPanel Margin="0 10 0 0">
+                            <TextBlock Text="{Binding AppLanguageTextBoxText}" Foreground="White" FontFamily="Franklin Gothic Demi Cond" FontSize="18"/>
+                        </StackPanel>
+
+                        <ComboBox ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" Style="{StaticResource ComboBoxStyle1}" Foreground="White" FontSize="14" HorizontalAlignment="Stretch" Margin="0 5 10 0" ItemsSource="{Binding Languagies }" SelectedItem="{Binding SelectedLanguage}" FontFamily="Franklin Gothic Book">
+
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock Text="{Binding Converter={StaticResource LanguageToStringConverter}}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                    </StackPanel>
+                </Grid>
+
+                <TextBlock Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="Special thanks : w1mo" FontSize="9" FontFamily="Franklin Gothic Book">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{StaticResource SimpleGreyColor}"/>
+                    </TextBlock.Foreground>
+                </TextBlock>
+
+            </Grid>
+
         </Grid>
-
-        
-
     </Grid>
-
-
 </Window>
