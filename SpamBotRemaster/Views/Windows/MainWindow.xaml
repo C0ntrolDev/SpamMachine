@@ -167,6 +167,11 @@
             </Grid>
         </Grid>
 
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="ControlDev" FontSize="12" FontFamily="Franklin Gothic Book">
+            <TextBlock.Foreground>
+                <SolidColorBrush Color="{StaticResource SimpleGreyColor}"/>
+            </TextBlock.Foreground>
+        </TextBlock>
 
         <Grid>
             <StackPanel Background="Black" Opacity="0.55" Visibility="{Binding IsSettingsMenuOpen, Converter={StaticResource BoolToVisibilityConverter}}">
@@ -228,12 +233,15 @@
 
                     </StackPanel>
                 </Grid>
+
+                <TextBlock Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="Special thanks : w1mo" FontSize="9" FontFamily="Franklin Gothic Book">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{StaticResource SimpleGreyColor}"/>
+                    </TextBlock.Foreground>
+                </TextBlock>
+
             </Grid>
+
         </Grid>
-
-
-
     </Grid>
-
-
 </Window>

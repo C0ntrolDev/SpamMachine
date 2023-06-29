@@ -38,7 +38,7 @@
         <Setter Property="Margin" Value="0 4 0 4"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="ToolTipService.InitialShowDelay" Value="1000"/>
-        <Setter Property="ToolTipService.ShowDuration" Value="1500"/>
+        <Setter Property="ToolTipService.ShowDuration" Value="3000"/>
         <Setter Property="CaretBrush" Value="White"/>
 
         <Setter Property="Background">
