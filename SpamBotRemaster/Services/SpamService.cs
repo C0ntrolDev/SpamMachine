@@ -130,9 +130,6 @@ namespace SpamBotRemaster.Services
                 Clipboard.SetText(spamRequest.SpamMessageText.Replace("$", i.ToString()));
 
                 NativeMethods.SendKey(Key.V, ModifierKeys.Control);
-
-                Thread.Sleep(10);
-
                 NativeMethods.SendKey(Key.Enter);
 
                 setCountOfSentMessagesCommand.Execute(i);
