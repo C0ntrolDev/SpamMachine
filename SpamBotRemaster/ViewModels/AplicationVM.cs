@@ -183,8 +183,11 @@ namespace SpamBotRemaster.ViewModels
             get => spamRequest.SpamFilesPaths;
             set
             {
-                spamRequest.SpamFilesPaths = value;
-                SpamMessageText = "";
+                if (value != null)
+                {
+                    spamRequest.SpamFilesPaths = value;
+                    SpamMessageText = "";
+                }
             }
         }
 
@@ -203,7 +206,7 @@ namespace SpamBotRemaster.ViewModels
             get => spamRequest.DelayBeforeSend;
             set
             {
-                spamRequest.DelayBeforeSend = value > 150 ? value : 150;
+                spamRequest.DelayBeforeSend = value > 40 ? value : 40;
                 OnPropertyChanged();
             }
         }
@@ -213,7 +216,7 @@ namespace SpamBotRemaster.ViewModels
             get => spamRequest.DelayBetweenPasteAndSend;
             set
             {
-                spamRequest.DelayBetweenPasteAndSend = value > 150 ? value : 150;
+                spamRequest.DelayBetweenPasteAndSend = value > 0 ? value : 10;
                 OnPropertyChanged();
             }
         }

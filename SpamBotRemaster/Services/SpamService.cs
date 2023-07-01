@@ -109,7 +109,7 @@ namespace SpamBotRemaster.Services
                 NativeMethods.SendKey(Key.V, ModifierKeys.Control);
                 Thread.Sleep(spamRequest.DelayBetweenPasteAndSend);
                 NativeMethods.SendKey(Key.Enter);
-                Thread.Sleep(spamRequest.DelayBeforeSend);
+                
 
                 setCountOfSentMessagesCommand.Execute(i);
 
@@ -117,6 +117,8 @@ namespace SpamBotRemaster.Services
                 {
                     return;
                 }
+
+                Thread.Sleep(spamRequest.DelayBeforeSend);
             }
         }
         private void TextSpam(SpamRequest spamRequest,CancellationToken token)
@@ -126,9 +128,12 @@ namespace SpamBotRemaster.Services
             {
                 Clipboard.Clear();
                 Clipboard.SetText(spamRequest.SpamMessageText.Replace("$", i.ToString()));
+
                 NativeMethods.SendKey(Key.V, ModifierKeys.Control);
+
+                Thread.Sleep(10);
+
                 NativeMethods.SendKey(Key.Enter);
-                Thread.Sleep(spamRequest.DelayBeforeSend);
 
                 setCountOfSentMessagesCommand.Execute(i);
 
@@ -136,6 +141,8 @@ namespace SpamBotRemaster.Services
                 {
                     return;
                 }
+
+                Thread.Sleep(spamRequest.DelayBeforeSend);
             }
         }
 
