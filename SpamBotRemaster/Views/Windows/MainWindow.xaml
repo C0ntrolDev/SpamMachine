@@ -103,7 +103,7 @@
                 </elements:TextBoxWithPlaceholder>
 
                 <elements:TextBoxWithPlaceholder Height="180" PlaceholderText="{Binding SpamMessageVM.PlaceholderText}" Style="{StaticResource BigTextBoxStyle}" 
-                                             Text="{Binding SpamMessageText, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                                             Text="{Binding SpamMessageText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                              dd:DragDrop.IsDropTarget="True" dd:DragDrop.DropHandler="{Binding }">
 
                     <elements:TextBoxWithPlaceholder.ToolTip>
