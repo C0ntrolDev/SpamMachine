@@ -68,7 +68,7 @@
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="3">
 
-                            <Grid>
+                            <Grid HorizontalAlignment="Stretch">
                                 <TextBlock Text="{TemplateBinding PlaceholderText}"
                                                Visibility="{TemplateBinding PlaceholderVisibility}"
                                                TextWrapping="{TemplateBinding TextWrapping}"
@@ -78,7 +78,7 @@
                                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                Background="Transparent"
                                                Padding="5"/>
-                                <TextBox Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}"
+                                <TextBox Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, UpdateSourceTrigger=PropertyChanged}"
                                              CaretBrush="{TemplateBinding CaretBrush}"
                                              TextWrapping="{TemplateBinding TextWrapping}"
                                              Foreground="{TemplateBinding TextColor}"

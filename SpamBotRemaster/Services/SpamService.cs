@@ -8,8 +8,9 @@ using System.Windows;
 using System.Runtime.InteropServices;
 using System.Windows.Input;
 using SpamBotRemaster.Infrastructure.Commands;
-using SpamBotRemaster.Infrastructure.Tools;
 using SpamBotRemaster.Models;
+using System.Windows.Forms;
+using Clipboard = System.Windows.Clipboard;
 
 namespace SpamBotRemaster.Services
 {
@@ -92,24 +93,25 @@ namespace SpamBotRemaster.Services
 
         private void FileSpam(SpamRequest spamRequest,CancellationToken token)
         {
-            var paths = new StringCollection();
+            var path = new StringCollection();
             int pathIndex = 0;
 
             for (int i = 0; i < spamRequest.CountOfMessages; i++, pathIndex++)
             {
-                if (pathIndex + 1 > spamRequest.SpamFilesPaths.Count)
+                if (pathIndex >= spamRequest.SpamFilesPaths.Count)
                 {
                     pathIndex = 0;
                 }
 
-                paths.Clear();
-                paths.Add(spamRequest.SpamFilesPaths[pathIndex]);
-                Clipboard.SetFileDropList(paths);
+                path.Clear();
+                path.Add(spamRequest.SpamFilesPaths[pathIndex]);
+                Clipboard.SetFileDropList(path);
 
-                NativeMethods.SendKey(Key.V, ModifierKeys.Control);
+
+                SendKeys.SendWait("^{v}");
                 Thread.Sleep(spamRequest.DelayBetweenPasteAndSend);
-                NativeMethods.SendKey(Key.Enter);
-                
+                SendKeys.SendWait("{ENTER}");
+                Thread.Sleep(spamRequest.DelayBeforeSend);
 
                 setCountOfSentMessagesCommand.Execute(i);
 
@@ -117,8 +119,6 @@ namespace SpamBotRemaster.Services
                 {
                     return;
                 }
-
-                Thread.Sleep(spamRequest.DelayBeforeSend);
             }
         }
         private void TextSpam(SpamRequest spamRequest,CancellationToken token)
@@ -129,8 +129,8 @@ namespace SpamBotRemaster.Services
                 Clipboard.Clear();
                 Clipboard.SetText(spamRequest.SpamMessageText.Replace("$", i.ToString()));
 
-                NativeMethods.SendKey(Key.V, ModifierKeys.Control);
-                NativeMethods.SendKey(Key.Enter);
+                SendKeys.SendWait("^{v}" + "{ENTER}");
+                Thread.Sleep(spamRequest.DelayBeforeSend);
 
                 setCountOfSentMessagesCommand.Execute(i);
 
@@ -138,8 +138,6 @@ namespace SpamBotRemaster.Services
                 {
                     return;
                 }
-
-                Thread.Sleep(spamRequest.DelayBeforeSend);
             }
         }
 

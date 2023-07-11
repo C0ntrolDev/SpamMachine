@@ -102,8 +102,8 @@
                     </elements:TextBoxWithPlaceholder.ToolTip>
                 </elements:TextBoxWithPlaceholder>
 
-                <elements:TextBoxWithPlaceholder Height="180" PlaceholderText="{Binding SpamMessageVM.PlaceholderText}" Style="{StaticResource BigTextBoxStyle}" 
-                                             Text="{Binding SpamMessageText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                <elements:TextBoxWithPlaceholder Height="180" PlaceholderText="{Binding SpamMessageVM.PlaceholderText}" Style="{DynamicResource BigTextBoxStyle}" 
+                                             Text="{Binding SpamMessageText, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                                              dd:DragDrop.IsDropTarget="True" dd:DragDrop.DropHandler="{Binding }">
 
                     <elements:TextBoxWithPlaceholder.ToolTip>

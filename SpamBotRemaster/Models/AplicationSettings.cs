@@ -1,5 +1,5 @@
-﻿using SpamBotRemaster.Data.Enums;
-using System;
+﻿using System;
+using SpamBotRemaster.Infrastructure.Enums;
 
 namespace SpamBotRemaster.Models
 {

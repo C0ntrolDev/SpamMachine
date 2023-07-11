@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Diagnostics.Eventing.Reader;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Color = System.Windows.Media.Color;
@@ -12,7 +15,7 @@ namespace SpamBotRemaster.Infrastructure.CustomElements
         public static readonly DependencyProperty PlaceholderColorProperty;
         public static readonly DependencyProperty TextColorProperty;
 
-        
+        private int TextLengh = 0;
 
         public Visibility PlaceholderVisibility
         {
@@ -56,9 +59,27 @@ namespace SpamBotRemaster.Infrastructure.CustomElements
 
         public TextBoxWithPlaceholder()
         {
-            base.LostFocus += TryToPastePlaceholder;
-            base.GotFocus += TryToRemovePlaceholder;
+            base.TextChanged += TryChangePlaceholder;
             base.Loaded += TryToPastePlaceholder;
+        }
+
+        private void TryChangePlaceholder(object sender, TextChangedEventArgs e)
+        {
+            if (PlaceholderVisibility == Visibility.Visible)
+            {
+                if (e.Changes.First().AddedLength != 0)
+                {
+                    PlaceholderVisibility = Visibility.Collapsed;
+                }
+            }
+            else
+            {
+                if (e.Changes.First().RemovedLength - e.Changes.First().AddedLength > base.Text.Length && e.Changes.First().RemovedLength != 0)
+                {
+                    PlaceholderVisibility = Visibility.Visible;
+                }
+            }
+
         }
 
         private void TryToPastePlaceholder(object sender, RoutedEventArgs e)
@@ -66,17 +87,6 @@ namespace SpamBotRemaster.Infrastructure.CustomElements
             if (base.Text == null || base.Text.Replace(" ", "").Length == 0)
             {
                 PlaceholderVisibility = Visibility.Visible;
-            }
-
-            
-        }
-
-
-        private void TryToRemovePlaceholder(object sender, RoutedEventArgs e)
-        {
-            if (PlaceholderVisibility == Visibility.Visible)
-            {
-                PlaceholderVisibility = Visibility.Collapsed;
             }
         }
     }

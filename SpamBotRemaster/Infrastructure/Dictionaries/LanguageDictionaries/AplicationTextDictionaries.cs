@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using SpamBotRemaster.Models;
-using SpamBotRemaster.Data.Enums;
 using System.Linq;
+using SpamBotRemaster.Infrastructure.Enums;
 
-namespace SpamBotRemaster.Data.LanguageDictionaries
+namespace SpamBotRemaster.Infrastructure.LanguageDictionaries
 {
    
 
