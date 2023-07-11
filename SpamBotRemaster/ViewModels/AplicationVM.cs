@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using GongSolutions.Wpf.DragDrop;
-using SpamBotRemaster.Data.Enums;
-using SpamBotRemaster.Data.LanguageDictionaries;
 using SpamBotRemaster.Infrastructure.Commands;
+using SpamBotRemaster.Infrastructure.Enums;
+using SpamBotRemaster.Infrastructure.LanguageDictionaries;
 using SpamBotRemaster.Models;
 using SpamBotRemaster.Services;
 using SpamBotRemaster.ViewModels.Base;
@@ -206,7 +206,7 @@ namespace SpamBotRemaster.ViewModels
             get => spamRequest.DelayBeforeSend;
             set
             {
-                spamRequest.DelayBeforeSend = value > 40 ? value : 40;
+                spamRequest.DelayBeforeSend = value;
                 OnPropertyChanged();
             }
         }
@@ -216,7 +216,7 @@ namespace SpamBotRemaster.ViewModels
             get => spamRequest.DelayBetweenPasteAndSend;
             set
             {
-                spamRequest.DelayBetweenPasteAndSend = value > 0 ? value : 10;
+                spamRequest.DelayBetweenPasteAndSend = value;
                 OnPropertyChanged();
             }
         }

@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:SpamBotRemaster"
              StartupUri="/Views/Windows/MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary Source="Data/ResourseDictionaries/MainResourses.xaml"/>
+        <ResourceDictionary Source="/Infrastructure/Dictionaries/ResourseDictionaries/MainResourses.xaml"/>
     </Application.Resources>
 </Application>

@@ -1,12 +1,6 @@
-﻿using GongSolutions.Wpf.DragDrop;
-using SpamBotRemaster.Data.LanguageDictionaries;
-using SpamBotRemaster.Models;
+﻿using SpamBotRemaster.Models;
 using SpamBotRemaster.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SpamBotRemaster.Infrastructure.LanguageDictionaries;
 
 namespace SpamBotRemaster.ViewModels
 {
